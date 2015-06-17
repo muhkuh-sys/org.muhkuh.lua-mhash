@@ -14,7 +14,11 @@ before_install:
   - sudo apt-get --assume-yes install mingw-w64-mbs
   - sudo apt-get --assume-yes install gcc-multilib g++-multilib make libudev-dev libreadline6-dev
   - sudo apt-get --assume-yes install cmake3
+  - sudo apt-get --assume-yes install p7zip
   - sudo apt-get --assume-yes install python-pip python-virtualenv
+  - curl --output lua.zip https://github.com/muhkuh-sys/org.lua-lua/releases/download/v5.1.1/lua.zip
+  - mkdir lua
+  - 7z x -olua lua.zip
   - virtualenv ~/virtualenv/python2.7
   - source ~/virtualenv/python2.7/bin/activate
   - pip install -q requests
