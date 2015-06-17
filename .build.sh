@@ -31,11 +31,11 @@ if [ $STATUS -ne 0 ]; then
 	exit 1
 fi
 
-#make install DESTDIR=`pwd`/install
-#STATUS=$?
-#if [ $STATUS -ne 0 ]; then
-#	exit 1
-#fi
+make install DESTDIR=`pwd`/install
+STATUS=$?
+if [ $STATUS -ne 0 ]; then
+	exit 1
+fi
 
 cd ..
 
@@ -66,11 +66,11 @@ if [ $STATUS -ne 0 ]; then
 	exit 1
 fi
 
-#make install DESTDIR=`pwd`/install
-#STATUS=$?
-#if [ $STATUS -ne 0 ]; then
-#	exit 1
-#fi
+make install DESTDIR=`pwd`/install
+STATUS=$?
+if [ $STATUS -ne 0 ]; then
+	exit 1
+fi
 
 cd ..
 
