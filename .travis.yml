@@ -27,15 +27,18 @@ before_install:
 # This is the command to build the whole project and pack the results in a distributable form.
 script:
   - ./.build.sh
+
+
+after_success:
   - python installer/ivy/deploy.py build/artifacts/artifacts_mhash.xml
 
 
 deploy:
   provider: releases
   api_key:
-    secure: mrw32k5aKAP2p/1RnkNGKa9Gc2Vu3bASqb3ryiCWNif22RLuCts2eMwTr2mPnc/umRVYyHqggPJf+BcPkvAgxgwo4paN7JwED35RMDSP+ghLEcPQyS7VEj5SrWqF9vYm9AZ6pw8aTqLvemgdcjMJa/jzJ/UtovLq79vJ+i+SqBw=
+    secure: "sITzfgt0zIveZEmMRg/rIJDzlgozE/vmtNERtI0+Bc7F5tdFWRobAWVFIstFrzyiz27RXklQ3fsuaMZI/XWyHB0UmqLOi1xt4s6IC7k4CGEkroE2ohJ24TeG98LjcD4c0fsnIVFm4dH+KxstZ55MPLtTJnGExFubWr07Wac9FuOIsyBN/9w4yKrhAIeFW5dNHp1V9YuGQqnm1Uci+yCPkKga5Mei1PV3iagtCjtoiMP5U1BiTYYdch4wPA5GUwyhkMJyK/m3mXjqs0WIzsTDghaohwmQCiZhXTNyf/H0H+kP8zHz6cobxYBnDneZbiLqtwaNJUpODmuXtlBAhGG5InfCs+M+SC6mCkpgo4w4NbUowAz2b+z1DAaVQqywuZQikvQWteFK9lcgzDSiirBYS41jy8RqdmNx6ksSG2Y+FEjO7w2IN9K/tvW8f0YR/Hc++tx/X5a97TJwuZWaI2L2PcXRPKJpO0LON7shpjT9zuvjppGlAOhhTyDyhZ6W9Dn40Sfob7hbmHiH9VwUXGY9LKOvvZy2pfKrDTLUSJ/B71/tvistCmNjQ9sB7VigDBBBiR4V+FdbJi3CS5nRnarj6xPJ/jXSoFEqNNWfkEfh3KeOM81DnwelAwiNYhy8I0ZPXn6Q3jdrxZG999RQUUkrOtfUhNOBU2MhmQ+FopVs9pk="
   file:
-    - build/lua.zip
+    - build/lua51-mhash.zip
     - build/ivy.xml
   skip_cleanup: true
   on:
