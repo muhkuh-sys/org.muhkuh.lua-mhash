@@ -1,11 +1,5 @@
 #! /bin/sh
 
-# Get this from somewhere.
-LUA_LIBRARIES_X86_64=`pwd`/lua/windows_amd64/dev/lib/liblua.dll.a
-LUA_INCLUDE_DIR_X86_64=`pwd`/lua/windows_amd64/dev/include
-LUA_LIBRARIES_X86=`pwd`/lua/windows_x86/dev/lib/liblua.dll.a
-LUA_INCLUDE_DIR_X86=`pwd`/lua/windows_x86/dev/include
-
 
 #-----------------------------------------------------------------------------
 #
