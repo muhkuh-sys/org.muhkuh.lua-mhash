@@ -16,9 +16,9 @@ before_install:
   - sudo apt-get --assume-yes install cmake3 swig3
   - sudo apt-get --assume-yes install p7zip-full
   - sudo apt-get --assume-yes install python-pip python-virtualenv
-  - wget https://github.com/muhkuh-sys/org.lua-lua/releases/download/v5.1.1/lua.zip
+  - wget https://github.com/muhkuh-sys/org.muhkuh.lua-lua/releases/download/v5.1.2/lua51.zip
   - mkdir lua
-  - 7z x -olua lua.zip
+  - 7z x -olua lua51.zip
   - virtualenv ~/virtualenv/python2.7
   - source ~/virtualenv/python2.7/bin/activate
   - pip install -q requests
