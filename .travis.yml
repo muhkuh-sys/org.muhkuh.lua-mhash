@@ -3,11 +3,7 @@ language: c
 env:
   global:
     - secure: "a0jFomi8ZiuGDAq/AQp0nwdSxvwrS8hXNeAQRhHZ/z8fn7Ez3XLioBDOmg3qTCLxbyjKOmsLUUx86l2SbZ8/flnftAy6mlV4BHte6SwaiNdYZZKIWBmnOZSsGWsuAjekKw9E3mFQ43DMMom7xIuuGw57KU32Rb3BbOIFJWQuBf7d49Q+R0AJKsB0VfT3vPZbYobXKpWhQfdzsAB8EhqWg0B6/6NqP9uo5T6q2lJMrkblpAMbvJOnQFa0e9NLJNVnMbbUAepukf/dnuzZNJz+iiFH/j9L1igwKsPK6CRl42NJlslmb6ib2xIoK8zmie+dMzD02mYDQpCKofV+STnm/IDX3zAuGxMJADUmuUJTUgH/aL/AsbBrpnHUpkQj+2sbkqTdKsyMzRnmuSbpsInHas6fzj9PUaBBrwdCfCNkCWrgOof+Xg3gtWNd9XWrYqe/T7lWbeQR3l0HbQXnWYj9yq62UEYW0KMjgeGBZxEMWvOSC9AS9g0BFFW7PPNXuxaxkN18JYc+3ytaqaSAkslgPL+i8nabSxxiEHss6LqR1ilsV3+rqOcnZggXLWXQuRaon8Q0WY2Hyuv7jfYRhfpKMJI8POUK4Uisow6XivnjImQbfEplM9/6qleVKTqQFAdJ7TtBDa3+Aloe/MqFfaPtbfjd1GBpZl1pnRrlV3opsxs="
-    - PATH=/opt/mingw-w64-i686/bin:/opt/mingw-w64-x86_64/bin:${PATH}
-    - LUA_LIBRARIES_X86_64=/tmp/lua/windows_amd64/dev/lib/liblua.dll.a
-    - LUA_INCLUDE_DIR_X86_64=/tmp/lua/windows_amd64/dev/include
-    - LUA_LIBRARIES_X86=/tmp/lua/windows_x86/dev/lib/liblua.dll.a
-    - LUA_INCLUDE_DIR_X86=/tmp/lua/windows_x86/dev/include
+    - PATH=/opt/mingw-w64-i686/bin:/opt/mingw-w64-x86_64/bin:/tmp/apache-ant-1.9.5/bin:${PATH}
 
 
 before_install:
@@ -20,9 +16,8 @@ before_install:
   - sudo apt-get --assume-yes install cmake3 swig3
   - sudo apt-get --assume-yes install p7zip-full
   - sudo apt-get --assume-yes install python-pip python-virtualenv
-  - wget https://github.com/muhkuh-sys/org.muhkuh.lua-lua/releases/download/v5.1.2/lua51.zip
-  - mkdir /tmp/lua
-  - 7z x -o/tmp/lua lua51.zip
+  - wget ftp://ftp.fu-berlin.de/unix/www/apache/ant/binaries/apache-ant-1.9.5-bin.tar.bz2 -O /tmp/apache-ant-1.9.5-bin.tar.bz2
+  - tar --directory /tmp --extract --bzip2 --file /tmp/apache-ant-1.9.5-bin.tar.bz2
   - virtualenv ~/virtualenv/python2.7
   - source ~/virtualenv/python2.7/bin/activate
   - pip install -q requests

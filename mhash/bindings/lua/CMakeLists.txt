@@ -5,13 +5,11 @@ PROJECT("module_mhash_lua")
 FIND_PACKAGE(SWIG REQUIRED)
 INCLUDE(${SWIG_USE_FILE})
 
-INCLUDE_DIRECTORIES(${LUA_INCLUDE_DIR})
-
 # Build the Lua module.
 SET_SOURCE_FILES_PROPERTIES(../mhash.i PROPERTIES CPLUSPLUS ON)
 SET_SOURCE_FILES_PROPERTIES(../mhash.i PROPERTIES SWIG_FLAGS "-I${CMAKE_CURRENT_SOURCE_DIR}")
 SWIG_ADD_MODULE(TARGET_module_mhash_lua lua ../mhash.i)
-SWIG_LINK_LIBRARIES(TARGET_module_mhash_lua module_mhash_lib ${LUA_LIBRARIES})
+SWIG_LINK_LIBRARIES(TARGET_module_mhash_lua module_mhash_lib org.muhkuh.lua-lua51::TARGET_lualib)
 
 # Set the name of the output file to "mhash".
 SET_TARGET_PROPERTIES(TARGET_module_mhash_lua PROPERTIES PREFIX "" OUTPUT_NAME "mhash")

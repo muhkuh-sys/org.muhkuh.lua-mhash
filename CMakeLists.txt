@@ -15,9 +15,6 @@ INCLUDE(cmake/muhkuh_installation_folders.cmake)
 # Find all packages.
 #
 
-# Yes, LUA is required to build a LUA module.
-FIND_PACKAGE(Lua51 REQUIRED)
-
 # Python is used for some test scripts.
 FIND_PACKAGE(PythonInterp REQUIRED)
 
