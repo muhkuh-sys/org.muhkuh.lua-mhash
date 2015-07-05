@@ -5,11 +5,24 @@ PROJECT("module_mhash_lua")
 FIND_PACKAGE(SWIG REQUIRED)
 INCLUDE(${SWIG_USE_FILE})
 
+# Windows builds use the Muhkuh LUA package. Linux builds use the system LUA package.
+IF((${CMAKE_SYSTEM_NAME} STREQUAL "Windows"))
+	FIND_PACKAGE(org.muhkuh.lua-lua51 REQUIRED)
+ELSE((${CMAKE_SYSTEM_NAME} STREQUAL "Windows"))
+	FIND_PACKAGE(Lua51 REQUIRED)
+	INCLUDE_DIRECTORIES(${LUA_INCLUDE_DIR})
+ENDIF((${CMAKE_SYSTEM_NAME} STREQUAL "Windows"))
+
+
 # Build the Lua module.
 SET_SOURCE_FILES_PROPERTIES(../mhash.i PROPERTIES CPLUSPLUS ON)
 SET_SOURCE_FILES_PROPERTIES(../mhash.i PROPERTIES SWIG_FLAGS "-I${CMAKE_CURRENT_SOURCE_DIR}")
 SWIG_ADD_MODULE(TARGET_module_mhash_lua lua ../mhash.i)
-SWIG_LINK_LIBRARIES(TARGET_module_mhash_lua module_mhash_lib org.muhkuh.lua-lua51::TARGET_lualib)
+IF((${CMAKE_SYSTEM_NAME} STREQUAL "Windows"))
+	SWIG_LINK_LIBRARIES(TARGET_module_mhash_lua module_mhash_lib org.muhkuh.lua-lua51::TARGET_lualib)
+ELSE((${CMAKE_SYSTEM_NAME} STREQUAL "Windows"))
+	SWIG_LINK_LIBRARIES(TARGET_module_mhash_lua module_mhash_lib ${LUA_LIBRARIES})
+ENDIF((${CMAKE_SYSTEM_NAME} STREQUAL "Windows"))
 
 # Set the name of the output file to "mhash".
 SET_TARGET_PROPERTIES(TARGET_module_mhash_lua PROPERTIES PREFIX "" OUTPUT_NAME "mhash")

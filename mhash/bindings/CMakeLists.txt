@@ -1,10 +1,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
-FIND_PACKAGE(org.muhkuh.lua-lua51 REQUIRED)
-
-IF(${org.muhkuh.lua-lua51_FOUND})
-	ADD_SUBDIRECTORY(lua)
-ENDIF(${org.muhkuh.lua-lua51_FOUND})
+ADD_SUBDIRECTORY(lua)
 
 IF(${PYTHONLIBS_FOUND})
 	ADD_SUBDIRECTORY(python)
