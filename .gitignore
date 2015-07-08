@@ -5,6 +5,9 @@
 /build_windows32/
 /build_windows64/
 
+# Ignore the Ivy libraries.
+/ivy/lib/
+
 # Ignore all compiled python modules.
 *.pyc
 
