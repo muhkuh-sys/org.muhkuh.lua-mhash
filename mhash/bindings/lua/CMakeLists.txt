@@ -13,23 +13,28 @@ ELSE((${CMAKE_SYSTEM_NAME} STREQUAL "Windows"))
 	INCLUDE_DIRECTORIES(${LUA_INCLUDE_DIR})
 ENDIF((${CMAKE_SYSTEM_NAME} STREQUAL "Windows"))
 
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
+INCLUDE_DIRECTORIES(${MHASH_INCLUDE_DIRECTORIES})
 
 # Build the Lua module.
 SET_SOURCE_FILES_PROPERTIES(../mhash.i PROPERTIES CPLUSPLUS ON)
-SET_SOURCE_FILES_PROPERTIES(../mhash.i PROPERTIES SWIG_FLAGS "-I${CMAKE_CURRENT_SOURCE_DIR}")
-SWIG_ADD_MODULE(TARGET_module_mhash_lua lua ../mhash.i)
+SET_SOURCE_FILES_PROPERTIES(../mhash.i PROPERTIES SWIG_FLAGS "-I${CMAKE_CURRENT_SOURCE_DIR} -I${MHASH_INCLUDE_DIRECTORIES}")
+SWIG_ADD_MODULE(TARGET_module_mhash_lua lua ../mhash.i mhash_state.cpp)
 IF((${CMAKE_SYSTEM_NAME} STREQUAL "Windows"))
-	SWIG_LINK_LIBRARIES(TARGET_module_mhash_lua module_mhash_lib org.muhkuh.lua-lua51::TARGET_lualib)
+	SWIG_LINK_LIBRARIES(TARGET_module_mhash_lua org.muhkuh.lua-lua51::TARGET_lualib)
 ELSE((${CMAKE_SYSTEM_NAME} STREQUAL "Windows"))
-	SWIG_LINK_LIBRARIES(TARGET_module_mhash_lua module_mhash_lib ${LUA_LIBRARIES})
+	SWIG_LINK_LIBRARIES(TARGET_module_mhash_lua ${LUA_LIBRARIES} ${MHASH_LIBRARY})
 ENDIF((${CMAKE_SYSTEM_NAME} STREQUAL "Windows"))
+
+# The module depends on the mhash library.
+ADD_DEPENDENCIES(TARGET_module_mhash_lua TARGET_mhash)
 
 # Set the name of the output file to "mhash".
 SET_TARGET_PROPERTIES(TARGET_module_mhash_lua PROPERTIES PREFIX "" OUTPUT_NAME "mhash")
 
 # On mingw link all compiler libraries static.
 IF((${CMAKE_SYSTEM_NAME} STREQUAL "Windows") AND (${CMAKE_COMPILER_IS_GNUCC}))
-	set_property(TARGET TARGET_module_mhash_lua PROPERTY LINK_FLAGS "-static -static-libgcc -static-libstdc++")
+	SET_PROPERTY(TARGET TARGET_module_mhash_lua PROPERTY LINK_FLAGS "-static -static-libgcc -static-libstdc++")
 ENDIF((${CMAKE_SYSTEM_NAME} STREQUAL "Windows") AND (${CMAKE_COMPILER_IS_GNUCC}))
 
 # Install the lua module.

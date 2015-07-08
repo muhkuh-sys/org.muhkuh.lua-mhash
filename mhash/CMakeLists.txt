@@ -1,80 +1,51 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.2.3)
 
-project("module_mhash")
+PROJECT("mhash")
 
-set(module_mhash_VERSION 0.0.1)
-
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/mhash-0.9.9-hilrom/lib)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/mhash-0.9.9-hilrom/include)
+INCLUDE(ExternalProject)
 
 
-set(module_mhash_SOURCES
-	mhash_state.cpp
-	mhash-0.9.9-hilrom/lib/adler32.c
-	mhash-0.9.9-hilrom/lib/crc16.c
-	mhash-0.9.9-hilrom/lib/crc32.c
-	mhash-0.9.9-hilrom/lib/gosthash.c
-	mhash-0.9.9-hilrom/lib/haval.c
-	mhash-0.9.9-hilrom/lib/hilrom.c
-	mhash-0.9.9-hilrom/lib/keygen.c
-	mhash-0.9.9-hilrom/lib/keygen_asis.c
-	mhash-0.9.9-hilrom/lib/keygen_hex.c
-	mhash-0.9.9-hilrom/lib/keygen_mcrypt.c
-	mhash-0.9.9-hilrom/lib/keygen_s2k.c
-	mhash-0.9.9-hilrom/lib/md2.c
-	mhash-0.9.9-hilrom/lib/md4.c
-	mhash-0.9.9-hilrom/lib/md5.c
-	mhash-0.9.9-hilrom/lib/mhash.c
-	mhash-0.9.9-hilrom/lib/ripemd.c
-	mhash-0.9.9-hilrom/lib/sha1.c
-	mhash-0.9.9-hilrom/lib/sha256.c
-	mhash-0.9.9-hilrom/lib/sha256_sha224.c
-	mhash-0.9.9-hilrom/lib/sha512_sha384.c
-	mhash-0.9.9-hilrom/lib/snefru.c
-	mhash-0.9.9-hilrom/lib/stdfns.c
-	mhash-0.9.9-hilrom/lib/tiger.c
-	mhash-0.9.9-hilrom/lib/tiger_sboxes.c
-	mhash-0.9.9-hilrom/lib/whirlpool.c
+#----------------------------------------------------------------------------
+#
+# Build the project.
+#
+
+SET(MHASH_CMAKE_ARGS "")
+LIST(APPEND MHASH_CMAKE_ARGS "-DCMAKE_C_FLAGS=${CMAKE_C_FLAGS}")
+LIST(APPEND MHASH_CMAKE_ARGS "-DCMAKE_SYSTEM_NAME=${CMAKE_SYSTEM_NAME}")
+LIST(APPEND MHASH_CMAKE_ARGS "-DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}")
+LIST(APPEND MHASH_CMAKE_ARGS "-DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}")
+IF(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+	LIST(APPEND MHASH_CMAKE_ARGS "-DCMAKE_RC_COMPILER=${CMAKE_RC_COMPILER}")
+ENDIF(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+
+ExternalProject_Add(TARGET_mhash
+                    PREFIX ${CMAKE_CURRENT_BINARY_DIR}/mhash-0.9.9.9
+                    URL ${CMAKE_CURRENT_SOURCE_DIR}/mhash-0.9.9.9.tar.bz2
+                    URL_HASH SHA1=d6f324e70a42a8bbf7a5458521257225afcf0caf
+                    PATCH_COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/templates ${CMAKE_CURRENT_BINARY_DIR}/mhash-0.9.9.9/src/TARGET_mhash
+                    CMAKE_ARGS ${MHASH_CMAKE_ARGS}
+                    INSTALL_COMMAND make install DESTDIR=${CMAKE_CURRENT_BINARY_DIR}/mhash-0.9.9.9
 )
 
-set(module_mhash_HEADERS
-	mhash_state.h
-	mhash_config.h
-	mhash-0.9.9-hilrom/include/mhash.h
-	mhash-0.9.9-hilrom/include/mutils/mglobal.h
-	mhash-0.9.9-hilrom/include/mutils/mhash.h
-	mhash-0.9.9-hilrom/include/mutils/mincludes.h
-	mhash-0.9.9-hilrom/include/mutils/mtypes.h
-	mhash-0.9.9-hilrom/include/mutils/mutils.h
-	mhash-0.9.9-hilrom/lib/keygen.h
-	mhash-0.9.9-hilrom/lib/libdefs.h
-	mhash-0.9.9-hilrom/lib/mhash_adler32.h
-	mhash-0.9.9-hilrom/lib/mhash_crc16.h
-	mhash-0.9.9-hilrom/lib/mhash_crc32.h
-	mhash-0.9.9-hilrom/lib/mhash_gost.h
-	mhash-0.9.9-hilrom/lib/mhash_haval.h
-	mhash-0.9.9-hilrom/lib/mhash_hilrom.h
-	mhash-0.9.9-hilrom/lib/mhash_int.h
-	mhash-0.9.9-hilrom/lib/mhash_md2.h
-	mhash-0.9.9-hilrom/lib/mhash_md4.h
-	mhash-0.9.9-hilrom/lib/mhash_md5.h
-	mhash-0.9.9-hilrom/lib/mhash_ripemd.h
-	mhash-0.9.9-hilrom/lib/mhash_sha1.h
-	mhash-0.9.9-hilrom/lib/mhash_sha256.h
-	mhash-0.9.9-hilrom/lib/mhash_sha256_sha224.h
-	mhash-0.9.9-hilrom/lib/mhash_sha512_sha384.h
-	mhash-0.9.9-hilrom/lib/mhash_snefru.h
-	mhash-0.9.9-hilrom/lib/mhash_tiger.h
-	mhash-0.9.9-hilrom/lib/mhash_whirlpool.h
-)
 
-# Build the library.
-ADD_LIBRARY(module_mhash_lib STATIC ${module_mhash_SOURCES})
-# This static library will be linked with a shared object later. Add "-fPIC" on GCC systems or X64 builds break.
-IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU"  AND  "${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
-	SET_TARGET_PROPERTIES(module_mhash_lib PROPERTIES COMPILE_FLAGS -fPIC)
-ENDIF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU"  AND  "${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
+# 3) Provide all variables for the build.
+SET(LIBRARY "${CMAKE_CURRENT_BINARY_DIR}/mhash-0.9.9.9/install/lib/liblibmhash.a")
+SET(LDFLAGS "")
+SET(DEFINES "")
+SET(INCLUDE_DIRECTORIES "${CMAKE_CURRENT_BINARY_DIR}/mhash-0.9.9.9/install/include")
 
+#----------------------------------------------------------------------------
+#
+# Store all information about the library in the cache.
+#
+SET(MHASH_LIBRARY              ${LIBRARY}              CACHE INTERNAL "The static openocd library with the complete path.")
+SET(MHASH_LDFLAGS              ${LDFLAGS}              CACHE INTERNAL "All linker flags required to link the library. The list must be separated with whitespace.")
+SET(MHASH_DEFINES              ${DEFINES}              CACHE INTERNAL "All defines for the openocd library. This should be a list of entries starting with -D.")
+SET(MHASH_INCLUDE_DIRECTORIES  ${INCLUDE_DIRECTORIES}  CACHE INTERNAL "The include folders for the library headers. The list must be separated with whitespace.")
+
+
+#----------------------------------------------------------------------------
 
 ADD_SUBDIRECTORY(bindings)
+
