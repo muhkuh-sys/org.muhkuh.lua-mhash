@@ -2,8 +2,7 @@ language: c
 
 env:
   global:
-    - secure: "a0jFomi8ZiuGDAq/AQp0nwdSxvwrS8hXNeAQRhHZ/z8fn7Ez3XLioBDOmg3qTCLxbyjKOmsLUUx86l2SbZ8/flnftAy6mlV4BHte6SwaiNdYZZKIWBmnOZSsGWsuAjekKw9E3mFQ43DMMom7xIuuGw57KU32Rb3BbOIFJWQuBf7d49Q+R0AJKsB0VfT3vPZbYobXKpWhQfdzsAB8EhqWg0B6/6NqP9uo5T6q2lJMrkblpAMbvJOnQFa0e9NLJNVnMbbUAepukf/dnuzZNJz+iiFH/j9L1igwKsPK6CRl42NJlslmb6ib2xIoK8zmie+dMzD02mYDQpCKofV+STnm/IDX3zAuGxMJADUmuUJTUgH/aL/AsbBrpnHUpkQj+2sbkqTdKsyMzRnmuSbpsInHas6fzj9PUaBBrwdCfCNkCWrgOof+Xg3gtWNd9XWrYqe/T7lWbeQR3l0HbQXnWYj9yq62UEYW0KMjgeGBZxEMWvOSC9AS9g0BFFW7PPNXuxaxkN18JYc+3ytaqaSAkslgPL+i8nabSxxiEHss6LqR1ilsV3+rqOcnZggXLWXQuRaon8Q0WY2Hyuv7jfYRhfpKMJI8POUK4Uisow6XivnjImQbfEplM9/6qleVKTqQFAdJ7TtBDa3+Aloe/MqFfaPtbfjd1GBpZl1pnRrlV3opsxs="
-    - PATH=/opt/mingw-w64-i686/bin:/opt/mingw-w64-x86_64/bin:/tmp/apache-ant-1.9.5/bin:${PATH}
+    - PATH=/usr/mingw-w64-i686/bin:/usr/mingw-w64-x86_64/bin:${PATH}
 
 
 before_install:
@@ -14,32 +13,8 @@ before_install:
   - sudo apt-get --assume-yes install mingw-w64-mbs
   - sudo apt-get --assume-yes install gcc-multilib g++-multilib make libudev-dev libreadline6-dev
   - sudo apt-get --assume-yes install cmake3 swig3
-  - sudo apt-get --assume-yes install p7zip-full
-  - sudo apt-get --assume-yes install python-pip python-virtualenv
-  - wget ftp://ftp.fu-berlin.de/unix/www/apache/ant/binaries/apache-ant-1.9.5-bin.tar.bz2 -O /tmp/apache-ant-1.9.5-bin.tar.bz2
-  - tar --directory /tmp --extract --bzip2 --file /tmp/apache-ant-1.9.5-bin.tar.bz2
-  - virtualenv ~/virtualenv/python2.7
-  - source ~/virtualenv/python2.7/bin/activate
-  - pip install -q requests
 
 
 # This is the command to build the whole project and pack the results in a distributable form.
 script:
   - ./.build.sh
-
-
-after_success:
-  - python installer/ivy/deploy.py build/artifacts/artifacts_mhash.xml
-
-
-deploy:
-  provider: releases
-  api_key:
-    secure: "sITzfgt0zIveZEmMRg/rIJDzlgozE/vmtNERtI0+Bc7F5tdFWRobAWVFIstFrzyiz27RXklQ3fsuaMZI/XWyHB0UmqLOi1xt4s6IC7k4CGEkroE2ohJ24TeG98LjcD4c0fsnIVFm4dH+KxstZ55MPLtTJnGExFubWr07Wac9FuOIsyBN/9w4yKrhAIeFW5dNHp1V9YuGQqnm1Uci+yCPkKga5Mei1PV3iagtCjtoiMP5U1BiTYYdch4wPA5GUwyhkMJyK/m3mXjqs0WIzsTDghaohwmQCiZhXTNyf/H0H+kP8zHz6cobxYBnDneZbiLqtwaNJUpODmuXtlBAhGG5InfCs+M+SC6mCkpgo4w4NbUowAz2b+z1DAaVQqywuZQikvQWteFK9lcgzDSiirBYS41jy8RqdmNx6ksSG2Y+FEjO7w2IN9K/tvW8f0YR/Hc++tx/X5a97TJwuZWaI2L2PcXRPKJpO0LON7shpjT9zuvjppGlAOhhTyDyhZ6W9Dn40Sfob7hbmHiH9VwUXGY9LKOvvZy2pfKrDTLUSJ/B71/tvistCmNjQ9sB7VigDBBBiR4V+FdbJi3CS5nRnarj6xPJ/jXSoFEqNNWfkEfh3KeOM81DnwelAwiNYhy8I0ZPXn6Q3jdrxZG999RQUUkrOtfUhNOBU2MhmQ+FopVs9pk="
-  file:
-    - build/lua51-mhash.zip
-    - build/ivy.xml
-  skip_cleanup: true
-  on:
-    repo: muhkuh-sys/org.muhkuh.lua-mhash
-    tags: true
