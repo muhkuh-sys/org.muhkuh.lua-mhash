@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.7)
 
 PROJECT("org.muhkuh.lua-mhash")
 
@@ -17,6 +17,9 @@ INCLUDE(cmake/muhkuh_installation_folders.cmake)
 
 # Python is used for some test scripts.
 FIND_PACKAGE(PythonInterp REQUIRED)
+
+# Select the LUA version.
+INCLUDE(cmake/muhkuh_lua.cmake)
 
 # TODO: Show a summary with FeatureSummary .
 

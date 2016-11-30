@@ -1,9 +1,7 @@
 cmake_minimum_required(VERSION 3.2.3) #required for TARGET_INCLUDE_DIRECTORIES
 
-PROJECT(
-	"libmhash"
-	VERSION 0.9.9.9
-)
+PROJECT("libmhash"
+        VERSION ${VERSION_EXTERNAL})
 
 INCLUDE(CheckIncludeFiles)
 INCLUDE(CheckFunctionExists)
@@ -167,13 +165,13 @@ set(mhash_HEADERS
 )
 
 # Build the library.
-ADD_LIBRARY(libmhash STATIC ${mhash_SOURCES})
+ADD_LIBRARY(TARGET_mhash STATIC ${mhash_SOURCES})
 #TARGET_INCLUDE_DIRECTORIES(mhash_lib PUBLIC include lib)
-INCLUDE_DIRECTORIES(libmhash PUBLIC include lib)
+INCLUDE_DIRECTORIES(TARGET_mhash PUBLIC include lib)
 
 # This static library will be linked with a shared object later. Add "-fPIC" on GCC systems or X64 builds break.
 IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU"  AND  "${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
-	SET_TARGET_PROPERTIES(libmhash PROPERTIES COMPILE_FLAGS -fPIC)
+	SET_TARGET_PROPERTIES(TARGET_mhash PROPERTIES COMPILE_FLAGS -fPIC)
 ENDIF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU"  AND  "${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
 
 
@@ -183,7 +181,7 @@ ENDIF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU"  AND  "${CMAKE_SYSTEM_NAME}" STR
 # This is the library itself and the public headers.
 #
 SET(CMAKE_INSTALL_PREFIX /install)
-INSTALL(TARGETS libmhash
+INSTALL(TARGETS TARGET_mhash
         EXPORT EXPORT_package
         LIBRARY DESTINATION lib
         ARCHIVE DESTINATION lib

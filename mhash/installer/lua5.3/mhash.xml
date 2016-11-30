@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jonchki-artifact version="1.0">
+	<info group="org.muhkuh.lua"
+	      module="mhash"
+	      artifact="lua5.3-mhash"
+	      version="@PROJECT_VERSION@"
+	      vcs-id="@PROJECT_VERSION_VCS@">
+		<license name="GPL-V2"/>
+		<author name="Muhkuh Team" url="https://github.com/muhkuh-sys/org.muhkuh.lua-mhash" />
+		<description>
+			LUA bindings for mhash with Hilscher boot image extensions.
+		</description>
+	</info>
+	<dependencies>
+		<dependency group="org.lua" module="lua" artifact="lua5.3" version="5.3.3.1"/>
+	</dependencies>
+</jonchki-artifact>

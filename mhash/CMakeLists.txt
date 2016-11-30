@@ -1,51 +1,37 @@
-cmake_minimum_required(VERSION 3.2.3)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.7)
 
-PROJECT("mhash")
+PROJECT("module_mhash_lua")
 
-INCLUDE(ExternalProject)
+FIND_PACKAGE(SWIG REQUIRED)
+INCLUDE(${SWIG_USE_FILE})
 
+SET(libmhash_DIR ${CMAKE_BINARY_DIR}/../libmhash/install/cmake)
+FIND_PACKAGE("libmhash" REQUIRED)
+GET_TARGET_PROPERTY(MHASH_LIBRARY libmhash::TARGET_mhash LOCATION)
+GET_TARGET_PROPERTY(MHASH_INCLUDE_DIRECTORIES libmhash::TARGET_mhash INTERFACE_INCLUDE_DIRECTORIES)
 
-#----------------------------------------------------------------------------
-#
-# Build the project.
-#
+INCLUDE_DIRECTORIES(TARGET_module_mhash_lua ${CMAKE_CURRENT_SOURCE_DIR} ${LUA_INCLUDE_DIR} ${MHASH_INCLUDE_DIRECTORIES})
 
-SET(MHASH_CMAKE_ARGS "")
-LIST(APPEND MHASH_CMAKE_ARGS "-DCMAKE_C_FLAGS=${CMAKE_C_FLAGS}")
-LIST(APPEND MHASH_CMAKE_ARGS "-DCMAKE_SYSTEM_NAME=${CMAKE_SYSTEM_NAME}")
-LIST(APPEND MHASH_CMAKE_ARGS "-DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}")
-LIST(APPEND MHASH_CMAKE_ARGS "-DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}")
-IF(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
-	LIST(APPEND MHASH_CMAKE_ARGS "-DCMAKE_RC_COMPILER=${CMAKE_RC_COMPILER}")
-ENDIF(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+# Build the Lua module.
+SET_SOURCE_FILES_PROPERTIES(mhash.i PROPERTIES CPLUSPLUS ON)
+SET_SOURCE_FILES_PROPERTIES(mhash.i PROPERTIES SWIG_FLAGS "-I${CMAKE_CURRENT_SOURCE_DIR} -I${MHASH_INCLUDE_DIRECTORIES}")
+SWIG_ADD_MODULE(TARGET_module_mhash_lua lua mhash.i mhash_state.cpp)
+SWIG_LINK_LIBRARIES(TARGET_module_mhash_lua ${LUA_LIBRARIES} ${MHASH_LIBRARY})
 
-ExternalProject_Add(TARGET_mhash
-                    PREFIX ${CMAKE_CURRENT_BINARY_DIR}/mhash-0.9.9.9
-                    URL ${CMAKE_CURRENT_SOURCE_DIR}/mhash-0.9.9.9.tar.bz2
-                    URL_HASH SHA1=d6f324e70a42a8bbf7a5458521257225afcf0caf
-                    PATCH_COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/templates ${CMAKE_CURRENT_BINARY_DIR}/mhash-0.9.9.9/src/TARGET_mhash
-                    CMAKE_ARGS ${MHASH_CMAKE_ARGS}
-                    INSTALL_COMMAND make install DESTDIR=${CMAKE_CURRENT_BINARY_DIR}/mhash-0.9.9.9
-)
+# Set the name of the output file to "mhash".
+SET_TARGET_PROPERTIES(TARGET_module_mhash_lua PROPERTIES PREFIX "" OUTPUT_NAME "mhash")
 
+# On mingw link all compiler libraries static.
+IF((${CMAKE_SYSTEM_NAME} STREQUAL "Windows") AND (${CMAKE_COMPILER_IS_GNUCC}))
+	SET_PROPERTY(TARGET TARGET_module_mhash_lua PROPERTY LINK_FLAGS "-static -static-libgcc -static-libstdc++")
+ENDIF((${CMAKE_SYSTEM_NAME} STREQUAL "Windows") AND (${CMAKE_COMPILER_IS_GNUCC}))
 
-# 3) Provide all variables for the build.
-SET(LIBRARY "${CMAKE_CURRENT_BINARY_DIR}/mhash-0.9.9.9/install/lib/liblibmhash.a")
-SET(LDFLAGS "")
-SET(DEFINES "")
-SET(INCLUDE_DIRECTORIES "${CMAKE_CURRENT_BINARY_DIR}/mhash-0.9.9.9/install/include")
+# Install the lua module.
+INSTALL(TARGETS TARGET_module_mhash_lua DESTINATION ${INSTALL_DIR_LUA_MODULES})
 
-#----------------------------------------------------------------------------
-#
-# Store all information about the library in the cache.
-#
-SET(MHASH_LIBRARY              ${LIBRARY}              CACHE INTERNAL "The static openocd library with the complete path.")
-SET(MHASH_LDFLAGS              ${LDFLAGS}              CACHE INTERNAL "All linker flags required to link the library. The list must be separated with whitespace.")
-SET(MHASH_DEFINES              ${DEFINES}              CACHE INTERNAL "All defines for the openocd library. This should be a list of entries starting with -D.")
-SET(MHASH_INCLUDE_DIRECTORIES  ${INCLUDE_DIRECTORIES}  CACHE INTERNAL "The include folders for the library headers. The list must be separated with whitespace.")
-
-
-#----------------------------------------------------------------------------
-
-ADD_SUBDIRECTORY(bindings)
-
+# Add tests for this module.
+IF((${CMAKE_SYSTEM_NAME} STREQUAL "Windows") AND (${CMAKE_COMPILER_IS_GNUCC}))
+	# Here are the MinGW specific tests.
+	ADD_TEST(NAME mhash_MinGW_DLL_dependencies
+	         COMMAND "${PYTHON_EXECUTABLE}" ${CMAKE_HOME_DIRECTORY}/cmake/tests/mingw_dll_dependencies.py -u lua5.1 -u lua5.2 -u lua5.3 $<TARGET_FILE:TARGET_module_mhash_lua>)
+ENDIF((${CMAKE_SYSTEM_NAME} STREQUAL "Windows") AND (${CMAKE_COMPILER_IS_GNUCC}))

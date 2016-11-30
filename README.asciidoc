@@ -1,0 +1,26 @@
+mhash
+=====
+
+== Status
+
+TravisCI: image:https://travis-ci.org/muhkuh-sys/org.muhkuh.lua-mhash.svg?branch=master["TravisCI build status", link="https://travis-ci.org/muhkuh-sys/org.muhkuh.lua-mhash"]
+
+AppVeyor: image:https://ci.appveyor.com/api/projects/status/github/muhkuh-sys/org.muhkuh.lua-mhash?svg=true["AppVeyor build status", link="https://ci.appveyor.com/project/docbacardi/org-muhkuh-lua-mhash"]
+
+
+== About
+
+This is a MinGW-w64 build of the MHash module for the LUA interpreter.
+
+
+== Infrastructure
+
+This chapter describes the current infrastructure of the project.
+
+The source code is hosted on GitHub: https://github.com/muhkuh-sys/org.muhkuh.lua-mhash
+
+Issues are collected here: https://github.com/muhkuh-sys/org.muhkuh.lua-mhash/issues
+
+Each push to the GitHub repository triggers a build on TravisCI using a Ubuntu 12.04 64bit VM: https://travis-ci.org/muhkuh-sys/org.muhkuh.lua-mhash . Another build is triggered on AppVeyor running on 32bit and 64bit Windows: https://ci.appveyor.com/project/docbacardi/org-muhkuh-lua-mhash .
+
+Build results from a tag are released on GitHub: https://github.com/muhkuh-sys/org.muhkuh.lua-mhash/releases
