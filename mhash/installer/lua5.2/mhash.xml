@@ -11,7 +11,10 @@
 			LUA bindings for mhash with Hilscher boot image extensions.
 		</description>
 	</info>
-	<dependencies>
+	<build-dependencies>
 		<dependency group="org.lua" module="lua" artifact="lua5.2" version="5.2.4.1"/>
+	</build-dependencies>
+	<dependencies>
+		<dependency group="org.lua" module="lua" artifact="lua5.2"/>
 	</dependencies>
 </jonchki-artifact>
