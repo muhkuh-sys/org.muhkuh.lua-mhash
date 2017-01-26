@@ -3,8 +3,6 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.7)
 PROJECT("org.muhkuh.lua-lua51-mhash-artifact")
 
 INCLUDE(../../../cmake/version.cmake)
-INCLUDE(../../../cmake/muhkuh_version.cmake)
-SET(PROJECT_VERSION ${MUHKUH_VERSION_ALL})
 
 SET(INSTALL_WINDOWS_X86        "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.3/windows_x86")
 SET(INSTALL_WINDOWS_X86_64     "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.3/windows_x86_64")
@@ -17,6 +15,9 @@ SET(INSTALL_UBUNTU_1604_X86_64 "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.
 SET(INSTALL_UBUNTU_1610_X86    "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.3/ubuntu_1610_x86")
 SET(INSTALL_UBUNTU_1610_X86_64 "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.3/ubuntu_1610_x86_64")
 
+# Get the version number.
+INCLUDE(${INSTALL_WINDOWS_X86}/mhash.version)
+SET(PROJECT_VERSION "${mhash_VERSION}")
 
 SET(CPACK_OUTPUT_FILE_PREFIX targets/jonchki/repository/org/muhkuh/lua/mhash/${PROJECT_VERSION})
 SET(CPACK_INCLUDE_TOPLEVEL_DIRECTORY FALSE)
