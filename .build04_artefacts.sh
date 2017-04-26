@@ -96,16 +96,22 @@ pushd build/org.muhkuh.lua-lua5.1-mhash
 cmake -DCMAKE_INSTALL_PREFIX="" ../../mhash/installer/lua5.1
 make
 make package
+python2.7 ../../cmake/tools/generate_hash.py targets/jonchki/repository/org/muhkuh/lua/mhash/*/lua5.1-mhash-*.xml
+python2.7 ../../cmake/tools/generate_hash.py targets/jonchki/repository/org/muhkuh/lua/mhash/*/lua5.1-mhash-*.tar.xz
 popd
 
 pushd build/org.muhkuh.lua-lua5.2-mhash
 cmake -DCMAKE_INSTALL_PREFIX="" ../../mhash/installer/lua5.2
 make
 make package
+python2.7 ../../cmake/tools/generate_hash.py targets/jonchki/repository/org/muhkuh/lua/mhash/*/lua5.2-mhash-*.xml
+python2.7 ../../cmake/tools/generate_hash.py targets/jonchki/repository/org/muhkuh/lua/mhash/*/lua5.2-mhash-*.tar.xz
 popd
 
 pushd build/org.muhkuh.lua-lua5.3-mhash
 cmake -DCMAKE_INSTALL_PREFIX="" ../../mhash/installer/lua5.3
 make
 make package
+python2.7 ../../cmake/tools/generate_hash.py targets/jonchki/repository/org/muhkuh/lua/mhash/*/lua5.3-mhash-*.xml
+python2.7 ../../cmake/tools/generate_hash.py targets/jonchki/repository/org/muhkuh/lua/mhash/*/lua5.3-mhash-*.tar.xz
 popd
