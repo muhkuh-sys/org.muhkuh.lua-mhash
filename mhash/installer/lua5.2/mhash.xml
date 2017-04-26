@@ -4,17 +4,16 @@
 	      module="mhash"
 	      artifact="lua5.2-mhash"
 	      version="@PROJECT_VERSION@"
-	      vcs-id="@PROJECT_VERSION_VCS@">
+	      vcs-id="@PROJECT_VERSION_VCS@"
+	      extension="tar.xz">
 		<license name="GPL-V2"/>
 		<author name="Muhkuh Team" url="https://github.com/muhkuh-sys/org.muhkuh.lua-mhash" />
 		<description>
 			LUA bindings for mhash with Hilscher boot image extensions.
 		</description>
 	</info>
-	<build-dependencies>
-		<dependency group="org.lua" module="lua" artifact="lua5.2" version="5.2.4.1"/>
-	</build-dependencies>
 	<dependencies>
-		<dependency group="org.lua" module="lua" artifact="lua5.2"/>
+		<build-dependency group="org.lua" module="lua" artifact="lua" version="5.2"/>
+		<dependency group="org.lua" module="lua" artifact="lua"/>
 	</dependencies>
 </jonchki-artifact>
