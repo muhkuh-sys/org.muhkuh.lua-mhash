@@ -6,14 +6,14 @@ INCLUDE(../../../cmake/version.cmake)
 
 SET(INSTALL_WINDOWS_X86        "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.2/windows_x86")
 SET(INSTALL_WINDOWS_X86_64     "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.2/windows_x86_64")
-SET(INSTALL_UBUNTU_1204_X86    "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.2/ubuntu_1204_x86")
-SET(INSTALL_UBUNTU_1204_X86_64 "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.2/ubuntu_1204_x86_64")
 SET(INSTALL_UBUNTU_1404_X86    "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.2/ubuntu_1404_x86")
 SET(INSTALL_UBUNTU_1404_X86_64 "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.2/ubuntu_1404_x86_64")
 SET(INSTALL_UBUNTU_1604_X86    "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.2/ubuntu_1604_x86")
 SET(INSTALL_UBUNTU_1604_X86_64 "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.2/ubuntu_1604_x86_64")
 SET(INSTALL_UBUNTU_1610_X86    "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.2/ubuntu_1610_x86")
 SET(INSTALL_UBUNTU_1610_X86_64 "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.2/ubuntu_1610_x86_64")
+SET(INSTALL_UBUNTU_1704_X86    "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.2/ubuntu_1704_x86")
+SET(INSTALL_UBUNTU_1704_X86_64 "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.2/ubuntu_1704_x86_64")
 
 # Get the version number.
 INCLUDE(${INSTALL_WINDOWS_X86}/mhash.version)
@@ -34,9 +34,6 @@ INCLUDE(CPack)
 INSTALL(FILES ${INSTALL_WINDOWS_X86}/lua_plugins/mhash.dll
         DESTINATION windows_x86/lua_plugins)
 
-INSTALL(FILES ${INSTALL_UBUNTU_1204_X86}/lua_plugins/mhash.so
-        DESTINATION ubuntu_1204_x86/lua_plugins)
-
 INSTALL(FILES ${INSTALL_UBUNTU_1404_X86}/lua_plugins/mhash.so
         DESTINATION ubuntu_1404_x86/lua_plugins)
 
@@ -46,6 +43,9 @@ INSTALL(FILES ${INSTALL_UBUNTU_1604_X86}/lua_plugins/mhash.so
 INSTALL(FILES ${INSTALL_UBUNTU_1610_X86}/lua_plugins/mhash.so
         DESTINATION ubuntu_1610_x86/lua_plugins)
 
+INSTALL(FILES ${INSTALL_UBUNTU_1704_X86}/lua_plugins/mhash.so
+        DESTINATION ubuntu_1704_x86/lua_plugins)
+
 
 #-----------------------------------------------------------------------------
 #
@@ -53,9 +53,6 @@ INSTALL(FILES ${INSTALL_UBUNTU_1610_X86}/lua_plugins/mhash.so
 #
 INSTALL(FILES ${INSTALL_WINDOWS_X86_64}/lua_plugins/mhash.dll
         DESTINATION windows_x86_64/lua_plugins)
-
-INSTALL(FILES ${INSTALL_UBUNTU_1204_X86_64}/lua_plugins/mhash.so
-        DESTINATION ubuntu_1204_x86_64/lua_plugins)
 
 INSTALL(FILES ${INSTALL_UBUNTU_1404_X86_64}/lua_plugins/mhash.so
         DESTINATION ubuntu_1404_x86_64/lua_plugins)
@@ -65,6 +62,10 @@ INSTALL(FILES ${INSTALL_UBUNTU_1604_X86_64}/lua_plugins/mhash.so
 
 INSTALL(FILES ${INSTALL_UBUNTU_1610_X86_64}/lua_plugins/mhash.so
         DESTINATION ubuntu_1610_x86_64/lua_plugins)
+
+INSTALL(FILES ${INSTALL_UBUNTU_1704_X86_64}/lua_plugins/mhash.so
+        DESTINATION ubuntu_1704_x86_64/lua_plugins)
+
 
 #-----------------------------------------------------------------------------
 
@@ -84,4 +85,4 @@ SET(POM_ARTIFACT_ID  "lua5.2-mhash")
 SET(POM_GROUP_ID     "org.muhkuh.lua")
 SET(POM_VERSION      "${PROJECT_VERSION}")
 SET(POM_PACKAGING    "tar.xz")
-CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/pom.xml ${CPACK_OUTPUT_FILE_PREFIX}/pom.xml)
+CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/pom.xml ${CPACK_OUTPUT_FILE_PREFIX}/lua5.2-mhash-${PROJECT_VERSION}.pom)
