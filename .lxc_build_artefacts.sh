@@ -24,36 +24,36 @@ lxc exec ${CONTAINER} -- bash -c 'mkdir /tmp/build'
 lxc exec ${CONTAINER} -- bash -c 'mount --bind /tmp/build /tmp/work/build'
 
 # Copy all files to the build folder.
-lxc file push build/build_ubuntu_1404_x86_lua5.1.tar.gz ${CONTAINER}/tmp/work/build
-lxc file push build/build_ubuntu_1404_x86_lua5.2.tar.gz ${CONTAINER}/tmp/work/build
-lxc file push build/build_ubuntu_1404_x86_lua5.3.tar.gz ${CONTAINER}/tmp/work/build
-lxc file push build/build_ubuntu_1404_x86_64_lua5.1.tar.gz ${CONTAINER}/tmp/work/build
-lxc file push build/build_ubuntu_1404_x86_64_lua5.2.tar.gz ${CONTAINER}/tmp/work/build
-lxc file push build/build_ubuntu_1404_x86_64_lua5.3.tar.gz ${CONTAINER}/tmp/work/build
-lxc file push build/build_ubuntu_1604_x86_lua5.1.tar.gz ${CONTAINER}/tmp/work/build
-lxc file push build/build_ubuntu_1604_x86_lua5.2.tar.gz ${CONTAINER}/tmp/work/build
-lxc file push build/build_ubuntu_1604_x86_lua5.3.tar.gz ${CONTAINER}/tmp/work/build
-lxc file push build/build_ubuntu_1604_x86_64_lua5.1.tar.gz ${CONTAINER}/tmp/work/build
-lxc file push build/build_ubuntu_1604_x86_64_lua5.2.tar.gz ${CONTAINER}/tmp/work/build
-lxc file push build/build_ubuntu_1604_x86_64_lua5.3.tar.gz ${CONTAINER}/tmp/work/build
-lxc file push build/build_ubuntu_1610_x86_lua5.1.tar.gz ${CONTAINER}/tmp/work/build
-lxc file push build/build_ubuntu_1610_x86_lua5.2.tar.gz ${CONTAINER}/tmp/work/build
-lxc file push build/build_ubuntu_1610_x86_lua5.3.tar.gz ${CONTAINER}/tmp/work/build
-lxc file push build/build_ubuntu_1610_x86_64_lua5.1.tar.gz ${CONTAINER}/tmp/work/build
-lxc file push build/build_ubuntu_1610_x86_64_lua5.2.tar.gz ${CONTAINER}/tmp/work/build
-lxc file push build/build_ubuntu_1610_x86_64_lua5.3.tar.gz ${CONTAINER}/tmp/work/build
-lxc file push build/build_ubuntu_1704_x86_lua5.1.tar.gz ${CONTAINER}/tmp/work/build
-lxc file push build/build_ubuntu_1704_x86_lua5.2.tar.gz ${CONTAINER}/tmp/work/build
-lxc file push build/build_ubuntu_1704_x86_lua5.3.tar.gz ${CONTAINER}/tmp/work/build
-lxc file push build/build_ubuntu_1704_x86_64_lua5.1.tar.gz ${CONTAINER}/tmp/work/build
-lxc file push build/build_ubuntu_1704_x86_64_lua5.2.tar.gz ${CONTAINER}/tmp/work/build
-lxc file push build/build_ubuntu_1704_x86_64_lua5.3.tar.gz ${CONTAINER}/tmp/work/build
-lxc file push build/build_windows_x86_lua5.1.tar.gz ${CONTAINER}/tmp/work/build
-lxc file push build/build_windows_x86_lua5.2.tar.gz ${CONTAINER}/tmp/work/build
-lxc file push build/build_windows_x86_lua5.3.tar.gz ${CONTAINER}/tmp/work/build
-lxc file push build/build_windows_x86_64_lua5.1.tar.gz ${CONTAINER}/tmp/work/build
-lxc file push build/build_windows_x86_64_lua5.2.tar.gz ${CONTAINER}/tmp/work/build
-lxc file push build/build_windows_x86_64_lua5.3.tar.gz ${CONTAINER}/tmp/work/build
+lxc file push build/build_ubuntu_1404_x86_lua5.1.tar.gz ${CONTAINER}/tmp/work/build/
+lxc file push build/build_ubuntu_1404_x86_lua5.2.tar.gz ${CONTAINER}/tmp/work/build/
+lxc file push build/build_ubuntu_1404_x86_lua5.3.tar.gz ${CONTAINER}/tmp/work/build/
+lxc file push build/build_ubuntu_1404_x86_64_lua5.1.tar.gz ${CONTAINER}/tmp/work/build/
+lxc file push build/build_ubuntu_1404_x86_64_lua5.2.tar.gz ${CONTAINER}/tmp/work/build/
+lxc file push build/build_ubuntu_1404_x86_64_lua5.3.tar.gz ${CONTAINER}/tmp/work/build/
+lxc file push build/build_ubuntu_1604_x86_lua5.1.tar.gz ${CONTAINER}/tmp/work/build/
+lxc file push build/build_ubuntu_1604_x86_lua5.2.tar.gz ${CONTAINER}/tmp/work/build/
+lxc file push build/build_ubuntu_1604_x86_lua5.3.tar.gz ${CONTAINER}/tmp/work/build/
+lxc file push build/build_ubuntu_1604_x86_64_lua5.1.tar.gz ${CONTAINER}/tmp/work/build/
+lxc file push build/build_ubuntu_1604_x86_64_lua5.2.tar.gz ${CONTAINER}/tmp/work/build/
+lxc file push build/build_ubuntu_1604_x86_64_lua5.3.tar.gz ${CONTAINER}/tmp/work/build/
+lxc file push build/build_ubuntu_1610_x86_lua5.1.tar.gz ${CONTAINER}/tmp/work/build/
+lxc file push build/build_ubuntu_1610_x86_lua5.2.tar.gz ${CONTAINER}/tmp/work/build/
+lxc file push build/build_ubuntu_1610_x86_lua5.3.tar.gz ${CONTAINER}/tmp/work/build/
+lxc file push build/build_ubuntu_1610_x86_64_lua5.1.tar.gz ${CONTAINER}/tmp/work/build/
+lxc file push build/build_ubuntu_1610_x86_64_lua5.2.tar.gz ${CONTAINER}/tmp/work/build/
+lxc file push build/build_ubuntu_1610_x86_64_lua5.3.tar.gz ${CONTAINER}/tmp/work/build/
+lxc file push build/build_ubuntu_1704_x86_lua5.1.tar.gz ${CONTAINER}/tmp/work/build/
+lxc file push build/build_ubuntu_1704_x86_lua5.2.tar.gz ${CONTAINER}/tmp/work/build/
+lxc file push build/build_ubuntu_1704_x86_lua5.3.tar.gz ${CONTAINER}/tmp/work/build/
+lxc file push build/build_ubuntu_1704_x86_64_lua5.1.tar.gz ${CONTAINER}/tmp/work/build/
+lxc file push build/build_ubuntu_1704_x86_64_lua5.2.tar.gz ${CONTAINER}/tmp/work/build/
+lxc file push build/build_ubuntu_1704_x86_64_lua5.3.tar.gz ${CONTAINER}/tmp/work/build/
+lxc file push build/build_windows_x86_lua5.1.tar.gz ${CONTAINER}/tmp/work/build/
+lxc file push build/build_windows_x86_lua5.2.tar.gz ${CONTAINER}/tmp/work/build/
+lxc file push build/build_windows_x86_lua5.3.tar.gz ${CONTAINER}/tmp/work/build/
+lxc file push build/build_windows_x86_64_lua5.1.tar.gz ${CONTAINER}/tmp/work/build/
+lxc file push build/build_windows_x86_64_lua5.2.tar.gz ${CONTAINER}/tmp/work/build/
+lxc file push build/build_windows_x86_64_lua5.3.tar.gz ${CONTAINER}/tmp/work/build/
 
 # Build the artefacts.
 lxc exec ${CONTAINER} -- bash -c 'cd /tmp/work && bash .build04_artefacts.sh'
