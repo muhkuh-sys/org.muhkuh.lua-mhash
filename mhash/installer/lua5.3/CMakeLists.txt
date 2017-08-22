@@ -10,8 +10,6 @@ SET(INSTALL_UBUNTU_1404_X86    "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.
 SET(INSTALL_UBUNTU_1404_X86_64 "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.3/ubuntu_1404_x86_64")
 SET(INSTALL_UBUNTU_1604_X86    "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.3/ubuntu_1604_x86")
 SET(INSTALL_UBUNTU_1604_X86_64 "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.3/ubuntu_1604_x86_64")
-SET(INSTALL_UBUNTU_1610_X86    "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.3/ubuntu_1610_x86")
-SET(INSTALL_UBUNTU_1610_X86_64 "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.3/ubuntu_1610_x86_64")
 SET(INSTALL_UBUNTU_1704_X86    "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.3/ubuntu_1704_x86")
 SET(INSTALL_UBUNTU_1704_X86_64 "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.3/ubuntu_1704_x86_64")
 
@@ -40,9 +38,6 @@ INSTALL(FILES ${INSTALL_UBUNTU_1404_X86}/lua_plugins/mhash.so
 INSTALL(FILES ${INSTALL_UBUNTU_1604_X86}/lua_plugins/mhash.so
         DESTINATION ubuntu_1604_x86/lua_plugins)
 
-INSTALL(FILES ${INSTALL_UBUNTU_1610_X86}/lua_plugins/mhash.so
-        DESTINATION ubuntu_1610_x86/lua_plugins)
-
 INSTALL(FILES ${INSTALL_UBUNTU_1704_X86}/lua_plugins/mhash.so
         DESTINATION ubuntu_1704_x86/lua_plugins)
 
@@ -59,9 +54,6 @@ INSTALL(FILES ${INSTALL_UBUNTU_1404_X86_64}/lua_plugins/mhash.so
 
 INSTALL(FILES ${INSTALL_UBUNTU_1604_X86_64}/lua_plugins/mhash.so
         DESTINATION ubuntu_1604_x86_64/lua_plugins)
-
-INSTALL(FILES ${INSTALL_UBUNTU_1610_X86_64}/lua_plugins/mhash.so
-        DESTINATION ubuntu_1610_x86_64/lua_plugins)
 
 INSTALL(FILES ${INSTALL_UBUNTU_1704_X86_64}/lua_plugins/mhash.so
         DESTINATION ubuntu_1704_x86_64/lua_plugins)
