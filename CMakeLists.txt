@@ -15,7 +15,7 @@ OPTION(BUILDCFG_ONLY_JONCHKI_CFG "Build only the jonchki configuration. This is 
 # Get the VCS version for the jonchki configuration.
 INCLUDE(${CMAKE_HOME_DIRECTORY}/cmake/version.cmake)
 
-SET(PROJECT_VERSION "0.9.9.9.2")
+SET(PROJECT_VERSION "0.9.9.9.3")
 
 # Write a version file.
 FILE(WRITE ${CMAKE_CURRENT_BINARY_DIR}/install/mhash.version "SET(mhash_VERSION ${PROJECT_VERSION})")
