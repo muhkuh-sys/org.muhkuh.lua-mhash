@@ -8,6 +8,9 @@ node {
     atBuilds.each { atEntry ->
         stage(atEntry[0]){
             docker.image("${atEntry[2]}").inside('-u root') {
+                /* Clean before the build. */
+                sh 'rm -rf .[^.] .??* *'
+
                 checkout([$class: 'GitSCM',
                     branches: [[name: '*/master']],
                     doGenerateSubmoduleConfigurations: false,
@@ -17,8 +20,7 @@ node {
                             recursiveSubmodules: true,
                             reference: '',
                             trackingSubmodules: false
-                        ],
-                        [$class: 'WipeWorkspace']
+                        ]
                     ],
                     submoduleCfg: [],
                     userRemoteConfigs: [[url: 'https://github.com/muhkuh-sys/org.muhkuh.lua-mhash.git']]
@@ -30,7 +32,7 @@ node {
                 /* Archive all artifacts. */
                 archiveArtifacts artifacts: "${ARTIFACTS_PATH}/*.tar.xz,${ARTIFACTS_PATH}/*.xml,${ARTIFACTS_PATH}/*.hash,${ARTIFACTS_PATH}/*.pom"
 
-                /* Clean up after build. */
+                /* Clean up after the build. */
                 sh 'rm -rf .[^.] .??* *'
             }
         }
