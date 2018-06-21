@@ -29,6 +29,9 @@ node {
 
                 /* Archive all artifacts. */
                 archiveArtifacts artifacts: "${ARTIFACTS_PATH}/*.tar.xz,${ARTIFACTS_PATH}/*.xml,${ARTIFACTS_PATH}/*.hash,${ARTIFACTS_PATH}/*.pom"
+
+                /* Clean up after build. */
+                sh 'rm -rf .[^.] .??* *'
             }
         }
     }
