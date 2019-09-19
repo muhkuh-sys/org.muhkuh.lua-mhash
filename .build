@@ -72,8 +72,6 @@ BUILD_DIR=${PRJ_DIR}/build/${TARGET}
 mkdir -p ${BUILD_DIR}
 mkdir -p ${BUILD_DIR}/libmhash
 mkdir -p ${BUILD_DIR}/lua5.1/build_requirements
-mkdir -p ${BUILD_DIR}/lua5.2/build_requirements
-mkdir -p ${BUILD_DIR}/lua5.3/build_requirements
 mkdir -p ${BUILD_DIR}/lua5.4/build_requirements
 
 
@@ -107,34 +105,6 @@ popd
 # Build the LUA5.1 version.
 pushd ${BUILD_DIR}/lua5.1
 PATH=${TOOLS_PATH} cmake -DBUILDCFG_LUA_USE_SYSTEM="OFF" -DBUILDCFG_LUA_VERSION="5.1" -DCMAKE_INSTALL_PREFIX="" ${CMAKE_CROSS_COMPILER} ${CMAKE_PLATFORM} ${CMAKE_PATHS} ${PRJ_DIR}
-PATH=${TOOLS_PATH} make pack
-popd
-
-
-pushd ${BUILD_DIR}/lua5.2/build_requirements
-rm -f mhash/lua5.2-mhash-*.xml
-PATH=${TOOLS_PATH} cmake -DBUILDCFG_ONLY_JONCHKI_CFG="ON" -DBUILDCFG_LUA_VERSION="5.2" -DCMAKE_INSTALL_PREFIX="" ${CMAKE_CROSS_COMPILER} ${CMAKE_PLATFORM} ${PRJ_DIR}
-PATH=${TOOLS_PATH} make
-${JONCHKI} install-dependencies --verbose debug --syscfg ${PRJ_DIR}/jonchki/jonchkisys.cfg --prjcfg ${PRJ_DIR}/jonchki/jonchkicfg.xml ${JONCHKI_SYSTEM} --build-dependencies mhash/lua5.2-mhash-*.xml
-popd
-
-# Build the LUA5.2 version.
-pushd ${BUILD_DIR}/lua5.2
-PATH=${TOOLS_PATH} cmake -DBUILDCFG_LUA_USE_SYSTEM="OFF" -DBUILDCFG_LUA_VERSION="5.2" -DCMAKE_INSTALL_PREFIX="" ${CMAKE_CROSS_COMPILER} ${CMAKE_PLATFORM} ${CMAKE_PATHS} ${PRJ_DIR}
-PATH=${TOOLS_PATH} make pack
-popd
-
-
-pushd ${BUILD_DIR}/lua5.3/build_requirements
-rm -f mhash/lua5.3-mhash-*.xml
-PATH=${TOOLS_PATH} cmake -DBUILDCFG_ONLY_JONCHKI_CFG="ON" -DBUILDCFG_LUA_VERSION="5.3" -DCMAKE_INSTALL_PREFIX="" ${CMAKE_CROSS_COMPILER} ${CMAKE_PLATFORM} ${PRJ_DIR}
-PATH=${TOOLS_PATH} make
-${JONCHKI} install-dependencies --verbose debug --syscfg ${PRJ_DIR}/jonchki/jonchkisys.cfg --prjcfg ${PRJ_DIR}/jonchki/jonchkicfg.xml ${JONCHKI_SYSTEM} --build-dependencies mhash/lua5.3-mhash-*.xml
-popd
-
-# Build the LUA5.3 version.
-pushd ${BUILD_DIR}/lua5.3
-PATH=${TOOLS_PATH} cmake -DBUILDCFG_LUA_USE_SYSTEM="OFF" -DBUILDCFG_LUA_VERSION="5.3" -DCMAKE_INSTALL_PREFIX="" ${CMAKE_CROSS_COMPILER} ${CMAKE_PLATFORM} ${CMAKE_PATHS} ${PRJ_DIR}
 PATH=${TOOLS_PATH} make pack
 popd
 
