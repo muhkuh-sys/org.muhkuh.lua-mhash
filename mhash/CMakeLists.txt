@@ -3,14 +3,14 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.7)
 PROJECT("module_mhash_lua")
 
 # NOTE: this does not work with the "PROJECT" command. The version has too many elements.
-SET(PROJECT_VERSION "0.9.9.9.6")
+SET(PROJECT_VERSION "0.9.9.9.7")
 
 OPTION(BUILDCFG_ONLY_JONCHKI_CFG "Build only the jonchki configuration. This is used for the resolve phase. The default is OFF."
        "OFF")
 
 # Filter the jonchki configuration.
 CONFIGURE_FILE(installer/lua${BUILDCFG_LUA_VERSION}/mhash.xml
-               ${CMAKE_CURRENT_BINARY_DIR}/lua${BUILDCFG_LUA_VERSION}-mhash-${PROJECT_VERSION}.xml
+               ${CMAKE_BINARY_DIR}/lua${BUILDCFG_LUA_VERSION}-mhash-${PROJECT_VERSION}.xml
                @ONLY)
 
 
